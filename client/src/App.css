@@ -1,0 +1,19 @@
+/* The main grid container */
+.my-masonry-grid {
+  display: -webkit-box; /* Not needed if autoprefixing */
+  display: -ms-flexbox; /* Not needed if autoprefixing */
+  display: flex;
+  margin-left: -16px; /* Offset the gap */
+  width: auto;
+}
+
+/* The individual columns */
+.my-masonry-grid_column {
+  padding-left: 16px; /* The gap between columns */
+  background-clip: padding-box;
+}
+
+/* Style your items */
+.my-masonry-grid_column > div {
+  margin-bottom: 16px; /* The vertical gap between items */
+}

@@ -31,7 +31,7 @@ const createPin = async (req, res) => {
 
 // Trigger NASA API Seeding
 const seedNasaData = async (req, res) => {
-    const { query } = req.body; // e.g., { "query": "Andromeda" }
+    const { query } = req.body;
     
     try {
         await seedSpaceData(query);
