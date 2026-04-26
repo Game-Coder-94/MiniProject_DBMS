@@ -26,6 +26,12 @@ const Navigation = () => {
           >
             🔭 Explore NASA
           </Link>
+          <Link
+            to="/login"
+            className={`nav-link ${location.pathname === '/login' ? 'active' : ''}`}
+          >
+            🔑 Login
+          </Link>
         </div>
       </div>
     </nav>

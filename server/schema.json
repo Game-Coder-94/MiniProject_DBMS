@@ -1,0 +1,306 @@
+{
+  "tables": [
+    {
+      "tablename": "favourites"
+    },
+    {
+      "tablename": "board_contains_pins"
+    },
+    {
+      "tablename": "users"
+    },
+    {
+      "tablename": "missions"
+    },
+    {
+      "tablename": "planets"
+    },
+    {
+      "tablename": "boards"
+    },
+    {
+      "tablename": "celestial_objects"
+    },
+    {
+      "tablename": "galaxies"
+    },
+    {
+      "tablename": "pins"
+    },
+    {
+      "tablename": "nebulae"
+    }
+  ],
+  "columns": [
+    {
+      "table_name": "pins",
+      "column_name": "object_id",
+      "data_type": "integer"
+    },
+    {
+      "table_name": "users",
+      "column_name": "profile_image_url",
+      "data_type": "text"
+    },
+    {
+      "table_name": "favourites",
+      "column_name": "title",
+      "data_type": "character varying"
+    },
+    {
+      "table_name": "missions",
+      "column_name": "mission_name",
+      "data_type": "character varying"
+    },
+    {
+      "table_name": "nebulae",
+      "column_name": "distance_ly",
+      "data_type": "numeric"
+    },
+    {
+      "table_name": "pins",
+      "column_name": "description",
+      "data_type": "text"
+    },
+    {
+      "table_name": "favourites",
+      "column_name": "id",
+      "data_type": "integer"
+    },
+    {
+      "table_name": "nebulae",
+      "column_name": "object_id",
+      "data_type": "integer"
+    },
+    {
+      "table_name": "pins",
+      "column_name": "pin_id",
+      "data_type": "integer"
+    },
+    {
+      "table_name": "celestial_objects",
+      "column_name": "name",
+      "data_type": "character varying"
+    },
+    {
+      "table_name": "boards",
+      "column_name": "created_at",
+      "data_type": "timestamp without time zone"
+    },
+    {
+      "table_name": "pins",
+      "column_name": "user_id",
+      "data_type": "integer"
+    },
+    {
+      "table_name": "v_main_feed",
+      "column_name": "image_url",
+      "data_type": "text"
+    },
+    {
+      "table_name": "favourites",
+      "column_name": "url",
+      "data_type": "character varying"
+    },
+    {
+      "table_name": "galaxies",
+      "column_name": "distance_ly",
+      "data_type": "numeric"
+    },
+    {
+      "table_name": "users",
+      "column_name": "created_at",
+      "data_type": "timestamp without time zone"
+    },
+    {
+      "table_name": "pins",
+      "column_name": "created_at",
+      "data_type": "timestamp without time zone"
+    },
+    {
+      "table_name": "boards",
+      "column_name": "description",
+      "data_type": "text"
+    },
+    {
+      "table_name": "board_contains_pins",
+      "column_name": "display_order",
+      "data_type": "integer"
+    },
+    {
+      "table_name": "v_main_feed",
+      "column_name": "mission_name",
+      "data_type": "character varying"
+    },
+    {
+      "table_name": "users",
+      "column_name": "email",
+      "data_type": "character varying"
+    },
+    {
+      "table_name": "board_contains_pins",
+      "column_name": "board_id",
+      "data_type": "integer"
+    },
+    {
+      "table_name": "boards",
+      "column_name": "board_id",
+      "data_type": "integer"
+    },
+    {
+      "table_name": "users",
+      "column_name": "user_id",
+      "data_type": "integer"
+    },
+    {
+      "table_name": "board_contains_pins",
+      "column_name": "added_at",
+      "data_type": "timestamp without time zone"
+    },
+    {
+      "table_name": "boards",
+      "column_name": "title",
+      "data_type": "character varying"
+    },
+    {
+      "table_name": "users",
+      "column_name": "password_hash",
+      "data_type": "text"
+    },
+    {
+      "table_name": "galaxies",
+      "column_name": "object_id",
+      "data_type": "integer"
+    },
+    {
+      "table_name": "planets",
+      "column_name": "mass_kg",
+      "data_type": "numeric"
+    },
+    {
+      "table_name": "planets",
+      "column_name": "moons_count",
+      "data_type": "integer"
+    },
+    {
+      "table_name": "users",
+      "column_name": "username",
+      "data_type": "character varying"
+    },
+    {
+      "table_name": "galaxies",
+      "column_name": "shape",
+      "data_type": "character varying"
+    },
+    {
+      "table_name": "planets",
+      "column_name": "object_id",
+      "data_type": "integer"
+    },
+    {
+      "table_name": "pins",
+      "column_name": "mission_id",
+      "data_type": "integer"
+    },
+    {
+      "table_name": "favourites",
+      "column_name": "description",
+      "data_type": "character varying"
+    },
+    {
+      "table_name": "planets",
+      "column_name": "atmosphere_type",
+      "data_type": "character varying"
+    },
+    {
+      "table_name": "board_contains_pins",
+      "column_name": "pin_id",
+      "data_type": "integer"
+    },
+    {
+      "table_name": "boards",
+      "column_name": "user_id",
+      "data_type": "integer"
+    },
+    {
+      "table_name": "v_main_feed",
+      "column_name": "space_object",
+      "data_type": "character varying"
+    },
+    {
+      "table_name": "celestial_objects",
+      "column_name": "object_id",
+      "data_type": "integer"
+    },
+    {
+      "table_name": "missions",
+      "column_name": "launch_date",
+      "data_type": "date"
+    },
+    {
+      "table_name": "nebulae",
+      "column_name": "nebula_type",
+      "data_type": "character varying"
+    },
+    {
+      "table_name": "pins",
+      "column_name": "image_url",
+      "data_type": "text"
+    },
+    {
+      "table_name": "favourites",
+      "column_name": "date",
+      "data_type": "timestamp with time zone"
+    },
+    {
+      "table_name": "v_main_feed",
+      "column_name": "pinner",
+      "data_type": "character varying"
+    },
+    {
+      "table_name": "boards",
+      "column_name": "is_private",
+      "data_type": "boolean"
+    },
+    {
+      "table_name": "v_main_feed",
+      "column_name": "pin_id",
+      "data_type": "integer"
+    },
+    {
+      "table_name": "celestial_objects",
+      "column_name": "object_type",
+      "data_type": "character varying"
+    },
+    {
+      "table_name": "v_main_feed",
+      "column_name": "description",
+      "data_type": "text"
+    },
+    {
+      "table_name": "users",
+      "column_name": "bio",
+      "data_type": "text"
+    },
+    {
+      "table_name": "missions",
+      "column_name": "organization",
+      "data_type": "character varying"
+    },
+    {
+      "table_name": "celestial_objects",
+      "column_name": "discovery_date",
+      "data_type": "date"
+    },
+    {
+      "table_name": "missions",
+      "column_name": "mission_id",
+      "data_type": "integer"
+    },
+    {
+      "table_name": "v_main_feed",
+      "column_name": "object_type",
+      "data_type": "character varying"
+    }
+  ]
+}

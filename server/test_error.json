@@ -1,0 +1,11 @@
+{
+  "code": 201,
+  "data": {
+    "user": {
+      "user_id": 2,
+      "username": "tester_1777210431400",
+      "email": "test_1777210431400@example.com"
+    },
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJ1c2VybmFtZSI6InRlc3Rlcl8xNzc3MjEwNDMxNDAwIiwiaWF0IjoxNzc3MjEwNDMxLCJleHAiOjE3NzcyOTY4MzF9.18kxKHGqbsEQkd8MKsnTH3bjlm211zEbj_mw8c7zTjY"
+  }
+}
