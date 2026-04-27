@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import Masonry from 'react-masonry-css';
 import ImageModal from '../components/ImageModal';
+import './Boards.css';
 import '../App.css';
 
 const BoardDetails = () => {
@@ -70,10 +71,9 @@ const BoardDetails = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-space-deeper">
-        <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-16 w-16 border-b-2 border-nebula-purple mb-4"></div>
-          <p className="text-nebula-purple text-lg font-semibold">Loading the cosmos...</p>
+      <div className="boards-container" style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+        <div style={{textAlign: 'center'}}>
+          <p style={{color: 'var(--color-secondary)', fontSize: '1.25rem', fontWeight: '600'}}>Loading the cosmos...</p>
         </div>
       </div>
     );
@@ -81,94 +81,97 @@ const BoardDetails = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-space-deeper p-4">
-        <div className="backdrop-blur-lg bg-white/10 border border-white/20 rounded-2xl p-8 max-w-md text-center">
-          <p className="text-red-400 text-lg mb-2">Connection Error</p>
-          <p className="text-slate-300 mb-4">{error}</p>
-          <button onClick={() => navigate('/boards')} className="px-4 py-2 bg-nebula-purple text-white rounded-xl font-bold">Return to Boards</button>
+      <div className="boards-container" style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+        <div className="board-card" style={{textAlign: 'center', maxWidth: '400px'}}>
+          <p style={{color: '#f87171', fontSize: '1.25rem', marginBottom: '0.5rem'}}>Connection Error</p>
+          <p style={{color: '#cbd5e1', marginBottom: '1rem'}}>{error}</p>
+          <button onClick={() => navigate('/boards')} className="details-empty-btn">Return to Boards</button>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-space-deeper p-4 md:p-8 pb-[200px]">
-      <div className="max-w-6xl mx-auto pt-10 pb-8 relative">
-        <button 
-            onClick={() => navigate('/boards')} 
-            className="absolute top-10 left-0 text-slate-400 hover:text-white transition-colors flex items-center gap-2 font-medium"
-        >
-            <span>←</span> Back to Boards
-        </button>
-        <div className="text-center mt-12 md:mt-0">
-          <h1 className="text-4xl md:text-5xl font-black bg-clip-text text-transparent bg-gradient-to-r from-nebula-purple via-blue-400 to-cyan-300 tracking-tight leading-tight mb-4 drop-shadow-lg drop-shadow-purple-500/20">
+    <div className="boards-container">
+      <div style={{position: 'relative', maxWidth: '1200px', margin: '0 auto'}}>
+        <div className="board-details-nav">
+          <button 
+              onClick={() => navigate('/boards')} 
+              className="back-btn"
+          >
+              <span>←</span> Back to Boards
+          </button>
+        </div>
+        
+        <div className="boards-header" style={{paddingTop: '4rem'}}>
+          <h1 className="boards-title">
             {boardDetails ? boardDetails.title : 'Board Details'}
           </h1>
-          <p className="text-slate-300 text-lg max-w-2xl mx-auto font-medium">
+          <p className="boards-subtitle">
             {boardDetails?.description || 'Your curated celestial artifacts.'}
           </p>
         </div>
-      </div>
 
-      <div className="max-w-7xl mx-auto mt-8">
-          {pins.length === 0 ? (
-            <div className="flex flex-col items-center justify-center py-20 px-4 bg-white/5 backdrop-blur-sm rounded-3xl border border-white/10 text-center max-w-2xl mx-auto">
-              <span className="text-6xl mb-4 opacity-50">🔭</span>
-              <h3 className="text-2xl font-bold text-white mb-2">No Pins Found</h3>
-              <p className="text-slate-400 mb-6">This board is currently empty. Head over to the feed or explore to start saving pins!</p>
-              <button 
-                  onClick={() => navigate('/')}
-                  className="bg-gradient-to-r from-nebula-purple to-cyan-500 text-white font-bold py-3 px-8 rounded-2xl transition-all duration-300 hover:scale-105 shadow-[0_0_20px_rgba(139,92,246,0.3)]"
-              >
-                  Explore Feed
-              </button>
-            </div>
-          ) : (
-            <Masonry
-              breakpointCols={breakpointColumnsObj}
-              className="my-masonry-grid"
-              columnClassName="my-masonry-grid_column"
-            >
-              {pins.map(pin => (
-                <div
-                  key={pin.pin_id}
-                  className="pin-card"
-                  onClick={() => openModal(pin)}
+        <div className="boards-content">
+            {pins.length === 0 ? (
+              <div className="boards-empty">
+                <span className="boards-empty-icon">🔭</span>
+                <h3 className="boards-empty-title">No Pins Found</h3>
+                <p className="boards-empty-text" style={{marginBottom: '1.5rem'}}>This board is currently empty. Head over to the feed or explore to start saving pins!</p>
+                <button 
+                    onClick={() => navigate('/')}
+                    className="details-empty-btn"
                 >
-                  <div className="pin-image-wrap">
-                    <img
-                      src={pin.image_url}
-                      alt={pin.space_object}
-                      className="pin-image"
-                      onError={(e) => {
-                        e.target.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="280"%3E%3Crect fill="%23223344" width="400" height="280"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" dy=".3em" fill="%23aabbcc" font-size="18"%3EImage unavailable%3C/text%3E%3C/svg%3E';
-                      }}
-                    />
-                    <div className="pin-badges">
-                      <span className="pin-badge pin-badge-type">
-                        {pin.object_type === 'P' && '🪐 Planet'}
-                        {pin.object_type === 'G' && '🌌 Galaxy'}
-                        {pin.object_type === 'N' && '🌫️ Nebula'}
-                        {!['P', 'G', 'N'].includes(pin.object_type) && `Type: ${pin.object_type}`}
-                      </span>
+                    Explore Feed
+                </button>
+              </div>
+            ) : (
+              <Masonry
+                breakpointCols={breakpointColumnsObj}
+                className="my-masonry-grid"
+                columnClassName="my-masonry-grid_column"
+              >
+                {pins.map(pin => (
+                  <div
+                    key={pin.pin_id}
+                    className="pin-card"
+                    onClick={() => openModal(pin)}
+                  >
+                    <div className="pin-image-wrap">
+                      <img
+                        src={pin.image_url}
+                        alt={pin.space_object}
+                        className="pin-image"
+                        onError={(e) => {
+                          e.target.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="280"%3E%3Crect fill="%23223344" width="400" height="280"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" dy=".3em" fill="%23aabbcc" font-size="18"%3EImage unavailable%3C/text%3E%3C/svg%3E';
+                        }}
+                      />
+                      <div className="pin-badges">
+                        <span className="pin-badge pin-badge-type">
+                          {pin.object_type === 'P' && '🪐 Planet'}
+                          {pin.object_type === 'G' && '🌌 Galaxy'}
+                          {pin.object_type === 'N' && '🌫️ Nebula'}
+                          {!['P', 'G', 'N'].includes(pin.object_type) && `Type: ${pin.object_type}`}
+                        </span>
+                      </div>
                     </div>
-                  </div>
 
-                  <div className="pin-meta p-4">
-                    <div>
-                      <h3 className="pin-title">{pin.space_object}</h3>
-                      <p className="pin-description">{pin.mission_name || 'Unknown mission'}</p>
-                    </div>
-                    <div className="pin-footer mt-2 flex justify-between items-center">
-                      <span className="pin-author text-xs text-slate-400">
-                          Added {pin.added_at ? new Date(pin.added_at).toLocaleDateString() : new Date(pin.created_at).toLocaleDateString()}
-                      </span>
+                    <div className="pin-meta p-4">
+                      <div>
+                        <h3 className="pin-title">{pin.space_object}</h3>
+                        <p className="pin-description">{pin.mission_name || 'Unknown mission'}</p>
+                      </div>
+                      <div className="pin-footer mt-2 flex justify-between items-center">
+                        <span className="pin-author text-xs text-slate-400">
+                            Added {pin.added_at ? new Date(pin.added_at).toLocaleDateString() : new Date(pin.created_at).toLocaleDateString()}
+                        </span>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
-            </Masonry>
-          )}
+                ))}
+              </Masonry>
+            )}
+        </div>
       </div>
 
       <ImageModal

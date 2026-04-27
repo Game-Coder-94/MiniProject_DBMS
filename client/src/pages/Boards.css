@@ -1,0 +1,393 @@
+.boards-container {
+  min-height: 100vh;
+  background-color: var(--color-bg-deeper);
+  padding: 2rem;
+  padding-bottom: 8rem;
+  font-family: var(--font-main);
+}
+
+.boards-header {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 3rem 0;
+  text-align: center;
+}
+
+.boards-title {
+  font-size: 4rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, var(--color-secondary) 0%, #60a5fa 50%, #67e8f9 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 10px 15px rgba(139, 92, 246, 0.2));
+}
+
+.boards-subtitle {
+  color: var(--color-text-muted);
+  font-size: 1.2rem;
+  font-weight: 500;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.boards-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Create Board Section */
+.create-board-card {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(90deg, rgba(15, 15, 30, 0.8) 0%, rgba(15, 23, 42, 0.8) 100%);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--color-glass-border);
+  border-radius: 24px;
+  padding: 2.5rem;
+  box-shadow: 0 0 50px rgba(139, 92, 246, 0.15);
+  margin-bottom: 4rem;
+}
+
+.create-board-stardust {
+  position: absolute;
+  inset: 0;
+  background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+.create-board-glow {
+  position: absolute;
+  top: -8rem;
+  right: -8rem;
+  width: 16rem;
+  height: 16rem;
+  background-color: rgba(6, 182, 212, 0.2);
+  filter: blur(80px);
+  border-radius: 50%;
+  transition: background-color 0.7s ease;
+}
+
+.create-board-card:hover .create-board-glow {
+  background-color: rgba(168, 85, 247, 0.3);
+}
+
+.create-board-content {
+  position: relative;
+  z-index: 10;
+}
+
+.create-board-heading {
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--color-text-main);
+  margin-bottom: 0.5rem;
+}
+
+.create-board-text {
+  color: #94a3b8;
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-bottom: 2rem;
+}
+
+.create-board-form {
+  display: flex;
+  gap: 1rem;
+}
+
+.create-board-input-wrapper {
+  position: relative;
+  flex: 1;
+}
+
+.create-board-icon {
+  position: absolute;
+  left: 1.25rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.25rem;
+  pointer-events: none;
+}
+
+.create-board-input {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  padding: 1rem 1rem 1rem 3.5rem;
+  color: var(--color-text-main);
+  font-size: 1.1rem;
+  font-family: var(--font-main);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.create-board-input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.5);
+}
+
+.create-board-submit {
+  background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-tertiary) 100%);
+  color: white;
+  font-weight: 700;
+  font-size: 1.1rem;
+  font-family: var(--font-main);
+  padding: 1rem 2.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+}
+
+.create-board-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(139, 92, 246, 0.7);
+}
+
+/* Boards Grid */
+.boards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+.board-card {
+  position: relative;
+  overflow: hidden;
+  background: rgba(15, 15, 30, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--color-glass-border);
+  border-radius: 24px;
+  padding: 2rem;
+  cursor: pointer;
+  transition: all 0.5s ease;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.board-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(168, 85, 247, 0.3);
+  border-color: rgba(168, 85, 247, 0.4);
+}
+
+.board-card-glow-tr {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 10rem;
+  height: 10rem;
+  background-color: rgba(168, 85, 247, 0.1);
+  filter: blur(40px);
+  border-radius: 50%;
+  transition: all 0.5s ease;
+}
+
+.board-card-glow-bl {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 8rem;
+  height: 8rem;
+  background-color: rgba(6, 182, 212, 0.1);
+  filter: blur(40px);
+  border-radius: 50%;
+  transition: all 0.5s ease;
+}
+
+.board-card:hover .board-card-glow-tr {
+  background-color: rgba(6, 182, 212, 0.2);
+}
+
+.board-card:hover .board-card-glow-bl {
+  background-color: rgba(168, 85, 247, 0.2);
+}
+
+.board-card-content {
+  position: relative;
+  z-index: 10;
+  flex: 1;
+}
+
+.board-card-icon {
+  width: 3.5rem;
+  height: 3.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.board-card:hover .board-card-icon {
+  transform: scale(1.1);
+}
+
+.board-card-title {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--color-text-main);
+  margin-bottom: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.board-card:hover .board-card-title {
+  background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-tertiary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.board-card-desc {
+  color: #94a3b8;
+  font-size: 0.875rem;
+  font-weight: 500;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.board-card-footer {
+  position: relative;
+  z-index: 10;
+  margin-top: 2rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.board-card-date {
+  color: #64748b;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.board-card-explore {
+  color: #22d3ee;
+  font-size: 0.875rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.3s ease;
+}
+
+.board-card:hover .board-card-explore {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Empty State */
+.boards-empty {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 5rem 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--color-glass-border);
+  border-radius: 24px;
+  text-align: center;
+}
+
+.boards-empty-icon {
+  font-size: 4rem;
+  opacity: 0.5;
+  margin-bottom: 1rem;
+}
+
+.boards-empty-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  margin-bottom: 0.5rem;
+}
+
+.boards-empty-text {
+  color: #94a3b8;
+  max-width: 400px;
+}
+
+/* Board Details Header */
+.board-details-nav {
+  position: absolute;
+  top: 2rem;
+  left: 0;
+}
+
+.back-btn {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: var(--font-main);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: color 0.3s ease;
+}
+
+.back-btn:hover {
+  color: var(--color-text-main);
+}
+
+.details-empty-btn {
+  background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-tertiary) 100%);
+  color: white;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+}
+
+.details-empty-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
+}
+
+@media (max-width: 768px) {
+  .create-board-form {
+    flex-direction: column;
+  }
+  .boards-title {
+    font-size: 2.5rem;
+  }
+  .create-board-heading {
+    font-size: 1.5rem;
+  }
+  .board-details-nav {
+    position: static;
+    margin-bottom: 2rem;
+  }
+}
