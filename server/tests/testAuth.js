@@ -1,4 +1,4 @@
-const { signup, login } = require('./controllers/authController');
+const { signup, login } = require('../controllers/authController');
 
 (async () => {
     try {
@@ -40,7 +40,7 @@ const { signup, login } = require('./controllers/authController');
 
         console.log('\n--- Testing Login ---');
         await login(mockLoginReq, mockLoginRes);
-    } catch(err) {
+    } catch (err) {
         console.error("Test failed:", err);
     } finally {
         setTimeout(() => process.exit(0), 1000);

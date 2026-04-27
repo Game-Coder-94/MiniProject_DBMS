@@ -9,6 +9,7 @@ const getFeed = async (req, res) => {
     res.json(result.rows);
   } catch (err) {
     console.error(err);
+    console.log("Error : ", err);
     res.status(500).send('Server Error');
   }
 };
@@ -25,20 +26,23 @@ const createPin = async (req, res) => {
     res.status(201).send('NASA Pin Created Successfully');
   } catch (err) {
     console.error(err.message);
+    console.log("Error : ", err);
     res.status(400).json({ error: err.message });
   }
 };
 
 // Trigger NASA API Seeding
 const seedNasaData = async (req, res) => {
-    const { query } = req.body;
-    
-    try {
-        await seedSpaceData(query);
-        res.status(200).send(`Successfully seeded database with '${query}' data.`);
-    } catch (err) {
-        res.status(500).send('Failed to seed NASA data');
-    }
+  const { query } = req.body;
+
+  try {
+    await seedSpaceData(query);
+    res.status(200).send(`Successfully seeded database with '${query}' data.`);
+  } catch (err) {
+    console.error(err.message);
+    console.log("Error : ", err);
+    res.status(500).send('Failed to seed NASA data');
+  }
 };
 
 module.exports = { getFeed, createPin, seedNasaData };

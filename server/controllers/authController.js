@@ -21,7 +21,7 @@ const signup = async (req, res) => {
 
     // Insert new user
     const result = await pool.query(
-      'INSERT INTO users (username, email, password_hash, created_at) VALUES ($1, $2, $3, NOW()) RETURNING user_id, username, email',
+      'INSERT INTO users (username, email, password_hash, created_at) VALUES ($1, $2, $3, NOW()) RETURNING user_id, username, email, profile_image_url',
       [username, email, passwordHash]
     );
 
@@ -51,7 +51,7 @@ const login = async (req, res) => {
   try {
     // Authenticate with either email or username
     const userResult = await pool.query(
-      'SELECT user_id, username, email, password_hash FROM users WHERE email = $1 OR username = $2',
+      'SELECT user_id, username, email, password_hash, profile_image_url FROM users WHERE email = $1 OR username = $2',
       [email || '', username || '']
     );
     
@@ -75,7 +75,12 @@ const login = async (req, res) => {
     );
 
     res.status(200).json({ 
-        user: { user_id: user.user_id, username: user.username, email: user.email }, 
+        user: { 
+            user_id: user.user_id, 
+            username: user.username, 
+            email: user.email, 
+            profile_image_url: user.profile_image_url 
+        }, 
         token 
     });
   } catch (err) {

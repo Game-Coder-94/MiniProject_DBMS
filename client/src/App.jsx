@@ -5,6 +5,8 @@ import Feed from './pages/Feed';
 import Explore from './pages/Explore';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import Boards from './pages/Boards';
+import BoardDetails from './pages/BoardDetails';
 import './App.css';
 
 function App() {
@@ -16,6 +18,8 @@ function App() {
         <Route path="/explore" element={<Explore />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/boards" element={<Boards />} />
+        <Route path="/boards/:boardId" element={<BoardDetails />} />
       </Routes>
     </Router>
   );

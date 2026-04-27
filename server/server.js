@@ -4,6 +4,7 @@ const cors = require('cors');
 require('dotenv').config();
 const pinRoutes = require('./routes/pinRoutes');
 const authRoutes = require('./routes/authRoutes');
+const boardRoutes = require('./routes/boardRoutes');
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.get('/health', (req, res) => {
 // Mount the routes
 app.use('/api', pinRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/boards', boardRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {

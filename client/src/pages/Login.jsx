@@ -4,8 +4,7 @@ import axios from 'axios';
 import '../App.css';
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [username, setUsername] = useState('');
+  const [identifier, setIdentifier] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
@@ -14,11 +13,15 @@ const Login = () => {
     e.preventDefault();
     try {
       const apiUrl = import.meta.env.DEV ? '/api/auth/login' : 'http://localhost:3000/api/auth/login';
-      const response = await axios.post(apiUrl, { email, username, password });
+      const isEmail = identifier.includes('@');
+      const payload = isEmail ? { email: identifier, password } : { username: identifier, password };
+      
+      const response = await axios.post(apiUrl, payload);
       localStorage.setItem('astro_token', response.data.token);
+      localStorage.setItem('astro_user', JSON.stringify(response.data.user));
       navigate('/');
     } catch (err) {
-      setError(err.response?.data?.error || 'Invalid coordinates. Access denied.');
+      setError(err.response?.data?.error || 'Invalid credentials. Access denied.');
     }
   };
 
@@ -38,32 +41,17 @@ const Login = () => {
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label className="block text-slate-300 text-sm font-semibold mb-2" htmlFor="username">
-              Username
+            <label className="block text-slate-300 text-sm font-semibold mb-2" htmlFor="identifier">
+              Username or Email
             </label>
             <input
-              id="username"
+              id="identifier"
               type="text"
               required
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              value={identifier}
+              onChange={(e) => setIdentifier(e.target.value)}
               className="w-full bg-space-dark/50 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-slate-400 focus:outline-none focus:border-space-accent focus:ring-1 focus:ring-space-accent transition-colors"
-              placeholder="astronaut_2026"
-            />
-          </div>
-
-          <div>
-            <label className="block text-slate-300 text-sm font-semibold mb-2" htmlFor="email">
-              Email Address
-            </label>
-            <input
-              id="email"
-              type="email"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full bg-space-dark/50 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-slate-400 focus:outline-none focus:border-space-accent focus:ring-1 focus:ring-space-accent transition-colors"
-              placeholder="astronaut@nasa.gov"
+              placeholder="astronaut_2026 or email"
             />
           </div>
 
@@ -84,7 +72,7 @@ const Login = () => {
 
           <button
             type="submit"
-            className="w-full bg-space-accent hover:bg-space-accent/80 text-white font-bold py-3 px-4 rounded-xl transition-all duration-300 transform hover:scale-[1.02] shadow-[0_0_15px_rgba(139,92,246,0.4)] hover:shadow-[0_0_25px_rgba(139,92,246,0.6)]"
+            className="w-full bg-gradient-to-r from-nebula-purple to-cyan-500 hover:from-[rgba(168,85,247,0.8)] hover:to-[rgba(6,182,212,0.8)] text-white font-bold py-3 px-4 rounded-xl transition-all duration-300 transform hover:scale-[1.02] shadow-[0_0_15px_rgba(139,92,246,0.4)] hover:shadow-[0_0_25px_rgba(139,92,246,0.6)]"
           >
             Launch 🚀
           </button>

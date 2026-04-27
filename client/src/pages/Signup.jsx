@@ -105,7 +105,7 @@ const Signup = () => {
 
           <button
             type="submit"
-            className="w-full bg-space-accent hover:bg-space-accent/80 text-white font-bold py-3 px-4 rounded-xl transition-all duration-300 transform hover:scale-[1.02] shadow-[0_0_15px_rgba(139,92,246,0.4)] hover:shadow-[0_0_25px_rgba(139,92,246,0.6)] mt-2"
+            className="w-full bg-gradient-to-r from-nebula-purple to-cyan-500 hover:from-[rgba(168,85,247,0.8)] hover:to-[rgba(6,182,212,0.8)] text-white font-bold py-3 px-4 rounded-xl transition-all duration-300 transform hover:scale-[1.02] shadow-[0_0_15px_rgba(139,92,246,0.4)] hover:shadow-[0_0_25px_rgba(139,92,246,0.6)] mt-2"
           >
             Join Mission 🚀
           </button>

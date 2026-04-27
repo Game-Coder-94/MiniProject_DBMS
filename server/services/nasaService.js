@@ -10,7 +10,7 @@ async function seedSpaceData(searchQuery) {
         for (let item of items) {
             const info = item.data[0];
             const image = item.links[0].href;
-            
+
             // 2. Simple logic to determine subtype for your Class Table Inheritance
             let objType = 'N'; // Default to Nebula
             if (info.keywords?.some(k => k.toLowerCase().includes('planet'))) objType = 'P';
@@ -38,5 +38,7 @@ async function seedSpaceData(searchQuery) {
     }
 }
 
+module.exports = { seedSpaceData };
+
 // Run it for "Mars" or "Andromeda"
-// seedSpaceData('Andromeda');
+// seedSpaceData('galaxy');

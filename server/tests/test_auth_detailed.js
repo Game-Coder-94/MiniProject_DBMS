@@ -1,4 +1,4 @@
-const { signup } = require('./controllers/authController');
+const { signup } = require('../controllers/authController');
 
 const req = {
   body: {

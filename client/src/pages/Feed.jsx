@@ -10,6 +10,10 @@ const Feed = () => {
   const [error, setError] = useState(null);
   const [selectedPin, setSelectedPin] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [savingPin, setSavingPin] = useState(null);
+  const [boards, setBoards] = useState([]);
+  const [saveError, setSaveError] = useState(null);
+  const [saveSuccess, setSaveSuccess] = useState(false);
 
   useEffect(() => {
     const fetchPins = async () => {
@@ -53,6 +57,41 @@ const Feed = () => {
   const closeModal = () => {
     setIsModalOpen(false);
     setSelectedPin(null);
+  };
+
+  const handleSaveClick = async (pin) => {
+    const token = localStorage.getItem('astro_token');
+    if (!token) {
+        alert('Please log in to save pins.');
+        return;
+    }
+    setSavingPin(pin);
+    setSaveError(null);
+    setSaveSuccess(false);
+    
+    try {
+        const apiUrl = import.meta.env.DEV ? '/api/boards' : 'http://localhost:3000/api/boards';
+        const response = await axios.get(apiUrl, {
+            headers: { Authorization: `Bearer ${token}` }
+        });
+        setBoards(response.data);
+    } catch (err) {
+        setSaveError('Could not load your boards');
+    }
+  };
+
+  const savePinToBoard = async (boardId) => {
+    try {
+        const token = localStorage.getItem('astro_token');
+        const apiUrl = import.meta.env.DEV ? '/api/boards/save' : 'http://localhost:3000/api/boards/save';
+        await axios.post(apiUrl, { board_id: boardId, pin_id: savingPin.pin_id }, {
+            headers: { Authorization: `Bearer ${token}` }
+        });
+        setSaveSuccess(true);
+        setTimeout(() => setSavingPin(null), 1500);
+    } catch (err) {
+        setSaveError('Failed to save pin to board. It might already exist!');
+    }
   };
 
   const breakpointColumnsObj = {
@@ -136,7 +175,7 @@ const Feed = () => {
               </div>
               <div className="pin-footer">
                 <span className="pin-author">@{pin.pinner || 'astro'}</span>
-                <button className="pin-action">Save</button>
+                <button className="pin-action" onClick={(e) => { e.stopPropagation(); handleSaveClick(pin); }}>Save</button>
               </div>
             </div>
           </div>
@@ -164,6 +203,51 @@ const Feed = () => {
         pin={selectedPin}
         onClose={closeModal}
       />
+
+      {/* Save to Board Modal */}
+      {savingPin && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+          <div className="bg-space-dark border border-white/20 rounded-3xl p-8 w-full max-w-md shadow-[0_0_50px_rgba(139,92,246,0.3)]">
+            <h2 className="text-3xl text-transparent bg-clip-text bg-gradient-to-r from-nebula-purple to-cyan-300 font-bold mb-6">Save to Board</h2>
+            <div className="flex gap-4 mb-6 p-4 rounded-2xl bg-white/5 border border-white/10">
+                <img src={savingPin.image_url} alt="Pin preview" className="w-16 h-16 object-cover rounded-xl" />
+                <div className="flex-1 overflow-hidden">
+                    <h3 className="text-white font-bold truncate">{savingPin.space_object}</h3>
+                    <p className="text-slate-400 text-sm truncate">{savingPin.mission_name || 'NASA Cosmos'}</p>
+                </div>
+            </div>
+            
+            {saveError && <p className="text-red-400 text-sm mb-4 font-semibold p-2 bg-red-400/10 rounded-xl border border-red-400/20">{saveError}</p>}
+            {saveSuccess && <p className="text-green-400 font-bold mb-4 text-center text-lg drop-shadow-[0_0_10px_rgba(74,222,128,0.5)]">✨ Successfully saved! ✨</p>}
+
+            {!saveSuccess && (
+                <div className="max-h-60 overflow-y-auto space-y-2 mb-6 custom-scrollbar pr-2">
+                    {boards.length === 0 ? (
+                        <p className="text-slate-400 text-sm text-center py-4 bg-white/5 rounded-xl border border-white/10">You have no boards. Create one in the Boards tab!</p>
+                    ) : (
+                        boards.map(board => (
+                            <div 
+                                key={board.board_id} 
+                                className="flex justify-between items-center p-4 hover:bg-white/10 rounded-xl cursor-pointer border border-transparent hover:border-white/20 transition-all shadow-sm"
+                                onClick={() => savePinToBoard(board.board_id)}
+                            >
+                                <span className="text-white font-semibold">{board.title}</span>
+                                <span className="text-space-accent bg-space-accent/20 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Save</span>
+                            </div>
+                        ))
+                    )}
+                </div>
+            )}
+
+            <button 
+                onClick={() => setSavingPin(null)} 
+                className="w-full bg-transparent hover:bg-white/10 text-white font-bold py-3 px-4 rounded-xl border-2 border-white/20 transition-all"
+            >
+                {saveSuccess ? 'Close' : 'Cancel'}
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
