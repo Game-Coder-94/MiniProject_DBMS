@@ -14,14 +14,16 @@ const Navigation = () => {
     <nav className="navigation-bar">
       <div className="nav-container">
         <div className="nav-brand">
-          <h2 className="nav-title">AstroPin</h2>
-          <p className="nav-subtitle">Explore NASA's Cosmos</p>
+          <Link to="/" style={{ textDecoration: 'none' }}>
+            <h2 className="nav-title">AstroPin</h2>
+            <p className="nav-subtitle">Explore NASA's Cosmos</p>
+          </Link>
         </div>
         
         <div className="nav-links">
           <Link
-            to="/"
-            className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}
+            to="/feed"
+            className={`nav-link ${location.pathname === '/feed' ? 'active' : ''}`}
           >
             📌 Feed
           </Link>

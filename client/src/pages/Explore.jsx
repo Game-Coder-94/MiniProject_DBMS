@@ -288,33 +288,33 @@ const Explore = () => {
 
       {/* Save to Board Modal */}
       {savingImage && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
-          <div className="bg-space-dark border border-white/20 rounded-3xl p-8 w-full max-w-md shadow-[0_0_50px_rgba(139,92,246,0.3)]">
-            <h2 className="text-3xl text-transparent bg-clip-text bg-gradient-to-r from-nebula-purple to-cyan-300 font-bold mb-6">Save to Board</h2>
-            <div className="flex gap-4 mb-6 p-4 rounded-2xl bg-white/5 border border-white/10">
-                <img src={savingImage.image_url} alt="Pin preview" className="w-16 h-16 object-cover rounded-xl" />
-                <div className="flex-1 overflow-hidden">
-                    <h3 className="text-white font-bold truncate">{savingImage.title}</h3>
-                    <p className="text-slate-400 text-sm truncate">NASA Explore Collection</p>
+        <div className="modal-overlay">
+          <div className="modal-container">
+            <h2 className="modal-title">Save to Board</h2>
+            <div className="modal-preview">
+                <img src={savingImage.image_url} alt="Pin preview" className="modal-preview-img" />
+                <div className="modal-preview-info">
+                    <h3 className="modal-preview-title">{savingImage.title}</h3>
+                    <p className="modal-preview-desc">NASA Explore Collection</p>
                 </div>
             </div>
             
-            {saveError && <p className="text-red-400 text-sm mb-4 font-semibold p-2 bg-red-400/10 rounded-xl border border-red-400/20">{saveError}</p>}
-            {saveSuccess && <p className="text-green-400 font-bold mb-4 text-center text-lg drop-shadow-[0_0_10px_rgba(74,222,128,0.5)]">✨ Seamlessly added! ✨</p>}
+            {saveError && <p className="modal-error">{saveError}</p>}
+            {saveSuccess && <p className="modal-success">✨ Seamlessly added! ✨</p>}
 
             {!saveSuccess && (
-                <div className="max-h-60 overflow-y-auto space-y-2 mb-6 custom-scrollbar pr-2">
+                <div className="modal-board-list">
                     {boards.length === 0 ? (
-                        <p className="text-slate-400 text-sm text-center py-4 bg-white/5 rounded-xl border border-white/10">You have no operational boards left!</p>
+                        <p className="modal-board-empty">You have no operational boards left!</p>
                     ) : (
                         boards.map(board => (
                             <div 
                                 key={board.board_id} 
-                                className="flex justify-between items-center p-4 hover:bg-white/10 rounded-xl cursor-pointer border border-transparent hover:border-white/20 transition-all shadow-sm"
+                                className="modal-board-item"
                                 onClick={() => saveExploreToBoardModal(board.board_id)}
                             >
-                                <span className="text-white font-semibold">{board.title}</span>
-                                <span className="text-space-accent bg-space-accent/20 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Save</span>
+                                <span className="modal-board-item-title">{board.title}</span>
+                                <span className="modal-board-item-btn">Save</span>
                             </div>
                         ))
                     )}
@@ -323,7 +323,7 @@ const Explore = () => {
 
             <button 
                 onClick={() => setSavingImage(null)} 
-                className="w-full bg-transparent hover:bg-white/10 text-white font-bold py-3 px-4 rounded-xl border-2 border-white/20 transition-all"
+                className="modal-close-btn"
             >
                 {saveSuccess ? 'Close' : 'Cancel'}
             </button>

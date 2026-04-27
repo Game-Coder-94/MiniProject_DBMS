@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navigation from './components/Navigation';
+import Landing from './pages/Landing';
 import Feed from './pages/Feed';
 import Explore from './pages/Explore';
 import Login from './pages/Login';
@@ -14,7 +15,8 @@ function App() {
     <Router>
       <Navigation />
       <Routes>
-        <Route path="/" element={<Feed />} />
+        <Route path="/" element={<Landing />} />
+        <Route path="/feed" element={<Feed />} />
         <Route path="/explore" element={<Explore />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
